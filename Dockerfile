@@ -3,8 +3,6 @@ FROM ubuntu:trusty
 MAINTAINER Markus Mattinen <markus@gamma.fi>
 
 ENV HOME /root
-ENV LANG C
-ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe multiverse" > /etc/apt/sources.list \
@@ -24,17 +22,24 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe m
  && apt-get update \
  && apt-get install -y --no-install-recommends apt-transport-https \
  && apt-get install -y --no-install-recommends language-pack-en curl wget vim software-properties-common \
+ && apt-get dist-upgrade -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
- && echo "LANG=en_US.UTF-8" > /etc/default/locale
+ && echo "LANG=en_US.UTF-8" > /etc/default/locales \
+ && echo "LC_COLLATE=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_CTYPE=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_MESSAGES=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_MONETARY=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_NUMERIC=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_PAPER=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_NAME=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_ADDRESS=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_TELEPHONE=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_MEASUREMENT=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_IDENTIFICATION=en_US.UTF-8" >> /etc/default/locales \
+ && echo "LC_TIME=en_US.UTF-8" >> /etc/default/locales
 
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-ENV BUILD_DATE 2014_05_26
-
-RUN apt-get update \
- && apt-get dist-upgrade -y --no-install-recommends \
- && dpkg-reconfigure locales \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN dpkg-reconfigure locales
