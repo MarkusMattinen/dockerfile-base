@@ -16,9 +16,11 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe m
  && dpkg-divert --local --rename --add /sbin/start \
  && dpkg-divert --local --rename --add /sbin/initctl \
  && dpkg-divert --local --rename --add /usr/bin/ischroot \
+ && dpkg-divert --local --rename --add /usr/bin/chfn \
  && ln -sf /bin/true /sbin/start \
  && ln -sf /bin/true /sbin/initctl \
  && ln -sf /bin/true /usr/bin/ischroot \
+ && ln -sf /bin/true /usr/bin/chfn \
  && apt-get update \
  && apt-get install -y --no-install-recommends apt-transport-https \
  && apt-get install -y --no-install-recommends language-pack-en curl wget vim software-properties-common \
