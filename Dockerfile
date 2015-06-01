@@ -23,7 +23,7 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe m
  && ln -sf /bin/true /usr/bin/chfn \
  && apt-get update \
  && apt-get install -y --no-install-recommends apt-transport-https \
- && apt-get install -y --no-install-recommends language-pack-en curl wget vim software-properties-common \
+ && apt-get install -y --no-install-recommends language-pack-en curl wget vim software-properties-common git-core \
  && apt-get dist-upgrade -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
